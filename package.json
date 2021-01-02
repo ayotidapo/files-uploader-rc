@@ -22,7 +22,7 @@
   "lint-staged": {
     "*.{js,jsx}": [
       "pretty-quick --staged",
-      "eslint src/ --fix",
+      "./node_modules/.bin/eslint --fix",
       "git add"
     ]
   },
