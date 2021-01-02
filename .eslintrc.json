@@ -13,7 +13,7 @@
         "react"
     ],
     "rules": {
-        "semi": 0,
+        "semi": 1,
         "react/jsx-filename-extension": [
             1,
             {
