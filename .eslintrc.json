@@ -52,7 +52,8 @@
         "react/no-did-update-set-state": 0,
         "react/button-has-type": 0,
         "func-names": 0,
-        "no-use-before-define": 0
+        "no-use-before-define": 0,
+        "no-unused-vars": "off"
     },
     "settings": {
         "import/resolver": {
