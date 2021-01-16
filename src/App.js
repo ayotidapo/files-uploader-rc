@@ -40,7 +40,7 @@ function App() {
           },
         },
       );
-      const { secure_url: responseUrl } = response.data.data;
+      const { secure_url: responseUrl } = response.data;
       fileDispatcher({ type: 'ADD_RESPONSE_URL', fileID, responseUrl });
     } catch (e) {
       console.log(e);
@@ -73,7 +73,7 @@ function App() {
 
     fileDispatcher({ type: 'REMOVE_FILE', fileID: file.id });
   };
-
+  console.log(files);
   return (
     <div style={{ width: '400px' }}>
       <div className="fl-u-wrap">
