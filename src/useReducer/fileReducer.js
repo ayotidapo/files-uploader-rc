@@ -23,12 +23,16 @@ const updateProgressValue = (state, action) => {
   const fileIndex = newState.findIndex((file) => file.id === action.fileID);
   newState[fileIndex].progress = action.progress;
   newState[fileIndex].cancelFunc = action.cancelFunc;
+  newState[fileIndex].loading = true;
+  newState[fileIndex].success = false;
   return newState;
 };
 
 const addResponseUrl = (state, action) => {
   const newState = state.slice(0);
   const fileIndex = newState.findIndex((file) => file.id === action.fileID);
-  newState[fileIndex].fileUrl = action.responseUrl;
+  newState[fileIndex].responseUrl = action.responseUrl;
+  newState[fileIndex].loading = false;
+  newState[fileIndex].success = true;
   return newState;
 };

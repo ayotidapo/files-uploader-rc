@@ -9,13 +9,32 @@ import './App.scss';
 
 function App() {
   const [files, fileDispatcher] = React.useReducer(fileReducer, []);
+  const [uploading, setUploading] = React.useState(false);
+  const [uploadCount, setUploadCount] = React.useState(0);
+  const [urls, setUrls] = React.useState([]);
 
-  // const memoizeUserInterests = React.useMemo(() => userInterests, [
-  //   userInterests,
-  // ]);
+  React.useEffect(() => {
+    if (uploadCount === files.length) {
+      setUploading(false);
+      const fileUrls = files.map((file) => file.responseUrl);
+
+      getFileUrls(fileUrls);
+      // props.submitFunc(fileUrls);
+    } else if (files.length < 1) setUploading(false);
+  }, [uploadCount]);
+
+  React.useEffect(() => {
+    if (files.length === 0 && uploading) setUploading(false);
+  }, [files.length]);
+
+  const getFileUrls = (f_urls) => {
+    // u can use tghis function to set the responseUrl so u can use tem the way u like in other apps
+    setUrls(f_urls);
+  };
 
   const uploadFilez = async (file) => {
     try {
+      setUploading(true);
       const formdata = new FormData();
       formdata.append('file', file.content);
       formdata.append('upload_preset', 'iikmkha3');
@@ -42,8 +61,11 @@ function App() {
       );
       const { secure_url: responseUrl } = response.data;
       fileDispatcher({ type: 'ADD_RESPONSE_URL', fileID, responseUrl });
+      setUploadCount((prevState) => prevState + 1);
     } catch (e) {
-      console.log(e);
+      fileDispatcher({ type: 'REMOVE_FILE', fileID: file.id }); // Todo: myt show that it fails with red bar and implement retry nt just getting the file and calling upload func
+      // setUploadCount(uploadCount - 1); this will be needed for RETRY and I will have to set uploadCount to minus 1 to indicating retry is going on
+      console.log(e, e?.response?.data?.message, e?.message);
     }
   };
 
@@ -57,6 +79,8 @@ function App() {
       progress: 0,
       cancelFunc: null,
       responseUrl: '',
+      loading: false,
+      success: false,
     }));
 
     const filez = getUnikArrObj([...newFilez, ...files], 'name');
@@ -68,15 +92,43 @@ function App() {
     });
   };
 
-  const onRemoveFile = (file) => {
-    file.cancelFunc();
-
-    fileDispatcher({ type: 'REMOVE_FILE', fileID: file.id });
+  const onRemoveFile = (file, e) => {
+    e.preventDefault();
+    if (file.cancelFunc) {
+      file.cancelFunc();
+      if (uploadCount > 0) setUploadCount((prevState) => prevState - 1);
+      fileDispatcher({ type: 'REMOVE_FILE', fileID: file.id });
+    }
   };
-  console.log(files);
+
   return (
-    <div style={{ width: '400px' }}>
-      <div className="fl-u-wrap">
+    <div style={{ width: '450px' }}>
+      {urls.map((u, i) => (
+        <h1 key={i}>{u}</h1>
+      ))}
+      {uploading && 'ongoing...'}
+      <label
+        className="fl-u-wrap"
+        onDrop={(e) => {
+          e.preventDefault();
+          onSelectFile(e.dataTransfer.files);
+        }}
+        onDragEnter={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          // / console.log('Files Entered: ');
+        }}
+        onDragOver={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          // console.log('Files Over: ');
+        }}
+        onDragLeave={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        }}
+      >
         <input
           type="file"
           id="file-selector"
@@ -88,9 +140,9 @@ function App() {
             e.target.value = null;
           }}
         />
-        <label className="pry-btn hand" htmlFor="file-selector">
-          Select file(s) to upload
-        </label>
+        <span className="pry-txt hand">
+          To upload, click to browse file(s) or drag file(s) here.
+        </span>
         {files.map((file) => (
           <ProgressWrapper
             key={file.id}
@@ -98,7 +150,7 @@ function App() {
             onRemoveFile={onRemoveFile}
           />
         ))}
-      </div>
+      </label>
     </div>
   );
 }

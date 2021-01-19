@@ -1,9 +1,10 @@
 import React from 'react';
 import { Line } from 'rc-progress';
+import CancelIcon from 'components/CancelIcon';
 
 const ProgressWrapper = (props) => {
   const { file, barWidth, barColor, onRemoveFile } = props;
-  const { id, name, size, progress } = file;
+  const { name, size, progress } = file;
 
   return (
     <div className="bp-wrp">
@@ -16,26 +17,13 @@ const ProgressWrapper = (props) => {
         <div className="pr-wrap" style={{ width: barWidth || '90%' }}>
           <Line
             percent={progress}
-            strokeWidth={barWidth || 2.5}
+            strokeWidth={barWidth || 1.5}
             strokeColor={barColor || '#07f'}
-            trailWidth={barWidth || 2.5}
+            trailWidth={barWidth || 1.5}
           />
         </div>
-        <span className="canc" onClick={() => onRemoveFile(file)}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            height="22"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
+        <span onClick={(e) => onRemoveFile(file, e)}>
+          <CancelIcon />
         </span>
       </div>
     </div>
