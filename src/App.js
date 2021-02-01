@@ -107,7 +107,7 @@ function App() {
         <h1 key={i}>{u}</h1>
       ))}
       {uploading && 'ongoing...'}
-      <label
+      <span
         className="fl-u-wrap"
         onDrop={(e) => {
           e.preventDefault();
@@ -140,9 +140,9 @@ function App() {
             e.target.value = null;
           }}
         />
-        <span className="pry-txt hand">
+        <label className="pry-txt hand" htmlFor="file-selector">
           To upload, click to browse file(s) or drag file(s) here.
-        </span>
+        </label>
         {files.map((file) => (
           <ProgressWrapper
             key={file.id}
@@ -150,7 +150,7 @@ function App() {
             onRemoveFile={onRemoveFile}
           />
         ))}
-      </label>
+      </span>
     </div>
   );
 }
