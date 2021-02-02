@@ -23,8 +23,8 @@ const ProgressWrapper = (props) => {
           />
         </div>
         <span
-          onClick={(e) => onRemoveFile(file, e)}
-          className={progress < 2 && 'dzb'}
+          onClick={progress < 2 ? null : (e) => onRemoveFile(file, e)}
+          className={progress < 2 ? 'dzb' : 'canc'}
         >
           <CancelIcon />
         </span>

@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import { v4 } from 'uuid';
-import { getUnikArrObj } from 'helpers/functions';
 import fileReducer from './useReducer/fileReducer';
 
 const useAsHooks = (upload_uri, filez = []) => {
@@ -15,8 +14,9 @@ const useAsHooks = (upload_uri, filez = []) => {
 
   const memoizeFilez = React.useMemo(() => filez, [filez]);
 
-  const getFileUrls = (f_urls) => {
-    setUrls(f_urls);
+  const getFileUrls = () => {
+    const fileUrls = files.map((file) => file.responseUrl);
+    setUrls(fileUrls);
   };
 
   React.useEffect(() => {
@@ -35,18 +35,19 @@ const useAsHooks = (upload_uri, filez = []) => {
       setCompleted(true);
       setUploading(false);
 
-      const fileUrls = files.map((file) => file.responseUrl);
-
-      getFileUrls(fileUrls);
+      getFileUrls();
       // props.submitFunc(fileUrls);
     } else if (fileLen < 1 && uploading) setCompleted(true);
+    else if (fileLen > 0 && uploading) {
+      getFileUrls();
+    }
     if (!firstLoad && fileLen < 1) setCompleted(false);
   }, [uploadedCount]);
 
   React.useEffect(() => {
     if (files.length === 0 && uploading) setUploading(false);
   }, [files.length]);
-  console.log(files);
+
   const uploadFilez = async (file) => {
     try {
       setUploading(true);
@@ -98,7 +99,7 @@ const useAsHooks = (upload_uri, filez = []) => {
       success: false,
     }));
 
-    const filez = getUnikArrObj([...newFilez, ...files], 'name');
+    const filez = [...newFilez, ...files];
 
     fileDispatcher({ type: 'UPDATE_FILES', filez });
 

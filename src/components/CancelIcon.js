@@ -1,7 +1,7 @@
 import React from 'react';
 
 const CancelIcon = () => (
-  <span className="canc">
+  <span>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
