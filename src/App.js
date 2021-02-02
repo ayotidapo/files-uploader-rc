@@ -35,7 +35,10 @@ function App() {
           multiple
           onChange={(e) => onSelectFile(e.target.files)}
           // eslint-disable-next-line no-return-assign
-          onClick={(e) => (e.target.value = '')}
+          onClick={(e) => {
+            // eslint-disable-next-line no-param-reassign
+            e.target.value = null;
+          }}
         />
         <label className="pry-txt hand" htmlFor="file-selector">
           To upload, click to browse file(s) or drag file(s) here.
