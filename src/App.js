@@ -5,11 +5,10 @@ import './App.scss';
 
 function App() {
   const [chosenFiles, setChosenFiles] = React.useState([]);
-  console.log(chosenFiles, 100);
-  const [uploading, onRemoveFile, files, urls] = useAsHooks(chosenFiles);
+  const uri = `https://api.cloudinary.com/v1_1/oladapo/upload`;
+  const [uploading, onRemoveFile, files, urls] = useAsHooks('', chosenFiles);
 
   const onSelectFile = (newFiles) => {
-    console.log(newFiles, 200);
     setChosenFiles(newFiles);
   };
 

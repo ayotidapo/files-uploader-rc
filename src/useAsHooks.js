@@ -4,7 +4,7 @@ import { v4 } from 'uuid';
 import { getUnikArrObj } from 'helpers/functions';
 import fileReducer from './useReducer/fileReducer';
 
-const useAsHooks = (filez) => {
+const useAsHooks = (upload_uri, filez = []) => {
   const [files, fileDispatcher] = React.useReducer(fileReducer, filez);
   const [uploading, setUploading] = React.useState(false);
   const [uploadCount, setUploadCount] = React.useState(0);
@@ -16,6 +16,12 @@ const useAsHooks = (filez) => {
     // u can use tghis function to set the responseUrl so u can use tem the way u like in other apps
     setUrls(f_urls);
   };
+
+  React.useEffect(() => {
+    if (!upload_uri) {
+      throw new Error("upload_uri  is required as hook's first parameter");
+    }
+  }, []);
 
   React.useEffect(() => {
     onSelectFile(filez);
@@ -46,29 +52,28 @@ const useAsHooks = (filez) => {
       const { CancelToken } = axios;
       const source = CancelToken.source();
 
-      const response = await axios.post(
-        `https://api.cloudinary.com/v1_1/oladapo/upload`,
-        formdata,
-        {
-          cancelToken: source.token,
-          onUploadProgress: (ProgressEvent) => {
-            const progress = (ProgressEvent.loaded / ProgressEvent.total) * 100;
-            fileDispatcher({
-              type: 'UPDATE_PROGRESS_VALUE',
-              fileID,
-              progress,
-              cancelFunc: source.cancel,
-            });
-          },
+      const response = await axios.post(upload_uri, formdata, {
+        cancelToken: source.token,
+        onUploadProgress: (ProgressEvent) => {
+          const progress = (ProgressEvent.loaded / ProgressEvent.total) * 100;
+          fileDispatcher({
+            type: 'UPDATE_PROGRESS_VALUE',
+            fileID,
+            progress,
+            cancelFunc: source.cancel,
+          });
         },
-      );
+      });
       const { secure_url: responseUrl } = response.data;
       fileDispatcher({ type: 'ADD_RESPONSE_URL', fileID, responseUrl });
       setUploadCount((prevState) => prevState + 1);
     } catch (e) {
       fileDispatcher({ type: 'REMOVE_FILE', fileID: file.id }); // Todo: myt show that it fails with red bar and implement retry nt just getting the file and calling upload func
       // setUploadCount(uploadCount - 1); this will be needed for RETRY and I will have to set uploadCount to minus 1 to indicating retry is going on
-      console.log(e, e?.response?.data?.message, e?.message);
+
+      const errMsg = e?.response?.data?.message || e?.message;
+
+      if (errMsg) throw new Error(errMsg || 'error occured');
     }
   };
 
