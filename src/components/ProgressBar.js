@@ -22,7 +22,10 @@ const ProgressWrapper = (props) => {
             trailWidth={barWidth || 1.5}
           />
         </div>
-        <span onClick={(e) => onRemoveFile(file, e)}>
+        <span
+          onClick={(e) => onRemoveFile(file, e)}
+          className={progress < 2 && 'dzb'}
+        >
           <CancelIcon />
         </span>
       </div>

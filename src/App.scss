@@ -31,7 +31,12 @@
     cursor: pointer;
   }
 }
-
+.dzb {
+  &:hover {
+    color: #e6dfdf;
+    cursor: not-allowed;
+  }
+}
 .hand {
   &:hover {
     cursor: pointer;

@@ -7,13 +7,15 @@ import fileReducer from './useReducer/fileReducer';
 const useAsHooks = (upload_uri, filez = []) => {
   const [files, fileDispatcher] = React.useReducer(fileReducer, filez);
   const [uploading, setUploading] = React.useState(false);
-  const [uploadCount, setUploadCount] = React.useState(0);
+  const [firstLoad, setFirstLoad] = React.useState(true);
+  const [completed, setCompleted] = React.useState(false);
+  const [uploadedCount, setUploadCount] = React.useState(0);
+
   const [urls, setUrls] = React.useState([]);
 
   const memoizeFilez = React.useMemo(() => filez, [filez]);
 
   const getFileUrls = (f_urls) => {
-    // u can use tghis function to set the responseUrl so u can use tem the way u like in other apps
     setUrls(f_urls);
   };
 
@@ -28,22 +30,28 @@ const useAsHooks = (upload_uri, filez = []) => {
   }, [memoizeFilez]);
 
   React.useEffect(() => {
-    if (uploadCount === files.length) {
+    const fileLen = files.length;
+    if (uploadedCount === files.length && !firstLoad) {
+      setCompleted(true);
       setUploading(false);
+
       const fileUrls = files.map((file) => file.responseUrl);
 
       getFileUrls(fileUrls);
       // props.submitFunc(fileUrls);
-    } else if (files.length < 1) setUploading(false);
-  }, [uploadCount]);
+    } else if (fileLen < 1 && uploading) setCompleted(true);
+    if (!firstLoad && fileLen < 1) setCompleted(false);
+  }, [uploadedCount]);
 
   React.useEffect(() => {
     if (files.length === 0 && uploading) setUploading(false);
   }, [files.length]);
-
+  console.log(files);
   const uploadFilez = async (file) => {
     try {
       setUploading(true);
+      setCompleted(false);
+      setFirstLoad(false);
       const formdata = new FormData();
       formdata.append('file', file.content);
       formdata.append('upload_preset', 'iikmkha3');
@@ -68,8 +76,7 @@ const useAsHooks = (upload_uri, filez = []) => {
       fileDispatcher({ type: 'ADD_RESPONSE_URL', fileID, responseUrl });
       setUploadCount((prevState) => prevState + 1);
     } catch (e) {
-      fileDispatcher({ type: 'REMOVE_FILE', fileID: file.id }); // Todo: myt show that it fails with red bar and implement retry nt just getting the file and calling upload func
-      // setUploadCount(uploadCount - 1); this will be needed for RETRY and I will have to set uploadCount to minus 1 to indicating retry is going on
+      fileDispatcher({ type: 'REMOVE_FILE', fileID: file.id });
 
       const errMsg = e?.response?.data?.message || e?.message;
 
@@ -104,12 +111,12 @@ const useAsHooks = (upload_uri, filez = []) => {
     e.preventDefault();
     if (file.cancelFunc) {
       file.cancelFunc();
-      if (uploadCount > 0) setUploadCount((prevState) => prevState - 1);
+      if (uploadedCount > 0) setUploadCount((prevState) => prevState - 1);
       fileDispatcher({ type: 'REMOVE_FILE', fileID: file.id });
     }
   };
 
-  return [uploading, onRemoveFile, files, urls];
+  return [uploading, completed, onRemoveFile, files, urls];
 };
 
 export default useAsHooks;
