@@ -15,6 +15,10 @@ function App() {
   const onSelectFile = (newFiles) => {
     setChosenFiles(newFiles);
   };
+  // React.useEffect(() => {
+  //   // eslint-disable-next-line no-undef
+  //   console.log(kiss.me);
+  // }, []);
 
   return (
     <div style={{ display: 'flex' }}>
