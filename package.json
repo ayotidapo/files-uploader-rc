@@ -2,25 +2,25 @@
   "name": "react-ui-file-upload",
   "version": "0.1.0",
   "private": true,
+  "main": "src/index.js",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.8",
-    "@testing-library/react": "^11.2.2",
-    "@testing-library/user-event": "^12.6.0",
     "axios": "^0.21.1",
     "node-sass": "^4.14.1",
     "rc-progress": "^3.1.3",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-scripts": "4.0.1",
     "uuid": "^8.3.2",
     "web-vitals": "^0.2.4"
+  },
+  "peerDependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "4.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "./node_modules/.bin/eslint ./src"
+    "lint": "eslint ./src"
   },
   "husky": {
     "hooks": {
@@ -52,6 +52,9 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.8",
+    "@testing-library/react": "^11.2.2",
+    "@testing-library/user-event": "^12.6.0",
     "eslint": "^7.16.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^7.1.0",
@@ -63,5 +66,24 @@
     "lint-staged": "^10.5.3",
     "prettier": "^2.2.1",
     "pretty-quick": "^3.1.0"
-  }
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ayotidapo/rcfiles-uploader.git"
+  },
+  "keywords": [
+    "file",
+    "uploader",
+    "ayotidapo",
+    "upload",
+    "file",
+    "progress"
+  ],
+  "author": "Oti oladapo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ayotidapo/rcfiles-uploader/issues"
+  },
+  "homepage": "https://github.com/ayotidapo/rcfiles-uploader#readme"
 }
