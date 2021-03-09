@@ -51,7 +51,28 @@ function App() {
           {uploading && 'Files upload: ongoing...'}
           {completed && 'Files upload: completed!!'}
         </h5>
-        <span className="fl-u-wrap">
+        <span
+          className="fl-u-wrap"
+          onDrop={(e) => {
+            e.preventDefault();
+            onSelectFile(e.dataTransfer.files);
+          }}
+          onDragEnter={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            // / console.log('Files Entered: ');
+          }}
+          onDragOver={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            // console.log('Files Over: ');
+          }}
+          onDragLeave={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+          }}
+        >
           <input
             type="file"
             id="file-selector"
