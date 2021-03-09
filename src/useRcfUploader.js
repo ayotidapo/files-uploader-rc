@@ -3,7 +3,7 @@ import axios from 'axios';
 import { v4 } from 'uuid';
 import fileReducer from './useReducer/fileReducer';
 
-const useAsHooks = (upload_uri, filez = []) => {
+const useRcfUploader = (upload_uri, filez = []) => {
   const [files, fileDispatcher] = React.useReducer(fileReducer, filez);
   const [uploading, setUploading] = React.useState(false);
   const [firstLoad, setFirstLoad] = React.useState(true);
@@ -120,4 +120,4 @@ const useAsHooks = (upload_uri, filez = []) => {
   return [uploading, completed, onRemoveFile, files, urls];
 };
 
-export default useAsHooks;
+export default useRcfUploader;

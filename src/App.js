@@ -1,13 +1,13 @@
 import React from 'react';
 import ProgressWrapper from 'components/ProgressBar';
-import useAsHooks from './useAsHooks';
+import useRcfUploader from './useRcfUploader';
 import './App.scss';
 
 function App() {
   const [chosenFiles, setChosenFiles] = React.useState([]);
   const uri = `https://api.cloudinary.com/v1_1/oladapo/upload`;
 
-  const [uploading, completed, onRemoveFile, files, urls] = useAsHooks(
+  const [uploading, completed, onRemoveFile, files, urls] = useRcfUploader(
     uri,
     chosenFiles,
   );
