@@ -1,0 +1,62 @@
+@import 'sass/colors.scss';
+@import 'index.scss';
+.color {
+  color: $primary-color;
+}
+.fl-u-wrap {
+  display: inline-flex;
+  width: 100%;
+  flex-direction: column;
+  border: 2px dotted #dbe0e6;
+  padding: 20px;
+  margin: 10px;
+  box-sizing: border-box;
+}
+
+.pry-txt {
+  padding: 5px;
+  color: #07f;
+  border: 0;
+  border-radius: 2px;
+  margin: 5px;
+  font-size: 1rem;
+}
+.canc {
+  color: grey;
+  display: inline-block;
+  margin: 2px 5px;
+  margin-right: 0px;
+  &:hover {
+    color: red;
+    cursor: pointer;
+  }
+}
+.dzb {
+  color: #e6dfdf;
+  &:hover {
+    cursor: not-allowed;
+  }
+}
+.hand {
+  &:hover {
+    cursor: pointer;
+  }
+}
+.pr-wrap {
+  min-width: 50%;
+  max-width: 90%;
+}
+.file-info {
+  display: flex;
+  span {
+    @extend .txt-elips;
+    flex-shrink: 0;
+    width: 50%;
+    &:last-child {
+      text-align: right;
+    }
+  }
+}
+.bp-wrp {
+  margin-top: 20px;
+}

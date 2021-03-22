@@ -1,6 +1,13 @@
 import React from 'react'
-import styles from './styles.module.css'
+import Uploader from './Uploader'
+import useRcfUploader from './useRcfUploader'
 
-export const ExampleComponent = ({ text }) => {
-  return <div className={styles.test}>Example Component: {text}</div>
+const UploaderComponent = ({ text }) => {
+  return (
+    <React.Fragment>
+      <Uploader allowMultiple />
+    </React.Fragment>
+  )
 }
+
+export { useRcfUploader, UploaderComponent }
