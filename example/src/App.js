@@ -1,38 +1,39 @@
 import React from 'react'
 
-import {
-  ExampleComponent,
-  useRcfUploader,
-  UploaderComponent
-} from 'react-files-uploader'
+import { useRcfUploader, UploaderUI } from 'react-files-uploader'
 import 'react-files-uploader/dist/index.css'
 
 const App = () => {
   const uri = `https://api.cloudinary.com/v1_1/oladapo/upload`
 
+  // To use Hooks
   const [chosenFiles, setChosenFiles] = React.useState([])
-
   const [files, urls] = useRcfUploader(uri, chosenFiles)
 
+  console.log(files, urls)
+
+  // onSelectFile will be passed to onChange attr of the HTML input
+  // eslint-disable-next-line no-unused-vars
   const onSelectFile = (newFiles) => {
     setChosenFiles(newFiles)
   }
-  console.log(files, urls)
+
+  /// End of To use Hooks  Explanation////
+
+  //*************************************************** */
+
+  // To use UI
+  const [returnUrls, setUrls] = React.useState([])
+
+  const onCompleted = (returnUrls) => {
+    setUrls(returnUrls)
+  }
+
+  console.log(returnUrls)
+  ///  End of To use UI ////
   return (
     <>
-      {/* <input
-        type='file'
-        id='file-selector'
-        multiple
-        onChange={(e) => onSelectFile(e.target.files)}
-        // eslint-disable-next-line no-return-assign
-        onClick={(e) => {
-          // eslint-disable-next-line no-param-reassign
-          e.target.value = null
-        }}
-      /> */}
-
-      <UploaderComponent />
+      <UploaderUI allowMultiple onCompleted={onCompleted} uploadUri={uri} />
     </>
   )
 }

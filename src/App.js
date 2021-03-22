@@ -1,25 +1,28 @@
-import React from 'react'
-import ProgressWrapper from './components/ProgressBar'
-import useRcfUploader from './useRcfUploader'
-import './App.scss'
+import React from 'react';
+import ProgressWrapper from 'components/ProgressBar';
+import useRcfUploader from './useRcfUploader';
+import './App.scss';
 
-const Uploader = (props) => {
-  const [chosenFiles, setChosenFiles] = React.useState([])
-  const uri = `https://api.cloudinary.com/v1_1/oladapo/upload`
-  const { maxNumOfFiles } = props
+function App() {
+  const [chosenFiles, setChosenFiles] = React.useState([]);
+  const uri = `https://api.cloudinary.com/v1_1/oladapo/upload`;
+
   const [uploading, completed, onRemoveFile, files, urls] = useRcfUploader(
     uri,
     chosenFiles,
-    maxNumOfFiles
-  )
-  console.log(props.allowedFiles)
+  );
+
   const onSelectFile = (newFiles) => {
-    setChosenFiles(newFiles)
-  }
+    setChosenFiles(newFiles);
+  };
+  // React.useEffect(() => {
+  //   // eslint-disable-next-line no-undef
+  //   console.log(kiss.me);
+  // }, []);
 
   return (
     <div style={{ display: 'flex' }}>
-      {urls.length > 0 && false && (
+      {urls.length > 0 && (
         <div style={{ marginLeft: '50px', marginTop: '20px', width: '400px' }}>
           The urls of uploaded files are:
           <ul>
@@ -31,7 +34,7 @@ const Uploader = (props) => {
                   background: 'antiquewhite',
                   padding: '10px',
                   borderRadius: '5px',
-                  marginBottom: '5px'
+                  marginBottom: '5px',
                 }}
                 key={i}
               >
@@ -49,46 +52,42 @@ const Uploader = (props) => {
           {completed && 'Files upload: completed!!'}
         </h5>
         <span
-          className='fl-u-wrap'
+          className="fl-u-wrap"
           onDrop={(e) => {
-            e.preventDefault()
-            onSelectFile(e.dataTransfer.files)
+            e.preventDefault();
+            onSelectFile(e.dataTransfer.files);
           }}
           onDragEnter={(e) => {
-            e.preventDefault()
-            e.stopPropagation()
+            e.preventDefault();
+            e.stopPropagation();
             // / console.log('Files Entered: ');
           }}
           onDragOver={(e) => {
-            e.preventDefault()
-            e.stopPropagation()
+            e.preventDefault();
+            e.stopPropagation();
             // console.log('Files Over: ');
           }}
           onDragLeave={(e) => {
-            e.preventDefault()
-            e.stopPropagation()
-            return false
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
           }}
         >
           <input
-            type='file'
-            id='file-selector'
+            type="file"
+            id="file-selector"
             style={{ display: 'none' }}
-            multiple={props.allowMultiple}
+            multiple
             onChange={(e) => onSelectFile(e.target.files)}
-            accept={props.allowedFiles}
             // eslint-disable-next-line no-return-assign
             onClick={(e) => {
               // eslint-disable-next-line no-param-reassign
-              e.target.value = null
+              e.target.value = null;
             }}
           />
-
-          <label className='pry-txt hand' htmlFor='file-selector'>
-            {props.children ||
-              `To upload, click to browse file(s) or drag file(s) here.`}
+          <label className="pry-txt hand" htmlFor="file-selector">
+            To upload, click to browse file(s) or drag file(s) here.
           </label>
-
           {files.map((file) => (
             <ProgressWrapper
               key={file.id}
@@ -99,7 +98,7 @@ const Uploader = (props) => {
         </span>
       </div>
     </div>
-  )
+  );
 }
 
-export default Uploader
+export default App;
