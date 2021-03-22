@@ -106,7 +106,7 @@ const useRcfUploader = (upload_uri, filez = [], maxNumOfFiles = 10) => {
 
     if (filez.length > maxNumOfFiles)
       throw new Error(
-        `The props value set for maxNumOfFiles is ${maxNumOfFiles}, you can edit it`
+        `The props value set for maxNumOfFiles is ${maxNumOfFiles}, you can change it`
       )
 
     fileDispatcher({ type: 'UPDATE_FILES', filez })
