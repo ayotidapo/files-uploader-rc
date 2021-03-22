@@ -55,6 +55,7 @@ const UploaderUI = (props) => {
         </h5>
         <span
           className='fl-u-wrap'
+          style={{ border: removeBorder && 'none' }}
           onDrop={(e) => {
             e.preventDefault()
 
