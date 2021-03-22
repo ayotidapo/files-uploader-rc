@@ -1,3 +1,19 @@
+<<<<<<< HEAD
+
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# dependencies
+node_modules
+
+# builds
+build
+dist
+.rpt2_cache
+
+# misc
+.DS_Store
+.env
+=======
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
@@ -16,6 +32,7 @@
 
 # misc
 .DS_Store
+>>>>>>> 6e5ad8a2083cdff2b9740db83f701b6d2cf745f6
 .env.local
 .env.development.local
 .env.test.local
@@ -24,7 +41,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+<<<<<<< HEAD
+=======
 
 
 
 .eslintcache
+>>>>>>> 6e5ad8a2083cdff2b9740db83f701b6d2cf745f6
