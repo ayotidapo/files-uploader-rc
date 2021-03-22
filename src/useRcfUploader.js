@@ -32,11 +32,12 @@ const useRcfUploader = (upload_uri, filez = [], maxNumOfFiles = 10) => {
   React.useEffect(() => {
     const fileLen = files.length
 
-    if (uploadedCount === files.length && !firstLoad) {
+    if (uploadedCount === fileLen && !firstLoad) {
       setCompleted(true)
       setUploading(false)
 
       getFileUrls()
+
       // props.submitFunc(fileUrls);
     } else if (fileLen < 1 && uploading) setCompleted(true)
     else if (fileLen > 0 && uploading) {
@@ -115,7 +116,7 @@ const useRcfUploader = (upload_uri, filez = [], maxNumOfFiles = 10) => {
       uploadFilez(file)
     })
   }
-
+  // console.log(urls, 76)
   const onRemoveFile = (file, e) => {
     e.preventDefault()
     if (file.cancelFunc) {
