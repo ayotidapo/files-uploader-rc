@@ -1,5 +1,5 @@
 # RcFiles-uploader   
-![npm i files-uploader-rc](https://yarnpkg.com/package/files-uploader-rc)
+[npm i files-uploader-rc](https://yarnpkg.com/package/files-uploader-rc)
 
 A very flexible file uploader that comes with: <br/>
  UI showing progress bar of simultaneous (Single or Multiple) file(s) uploading,<br/>
