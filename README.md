@@ -7,12 +7,12 @@
 > drag and drop feature and returns the uploaded file(s) url links.<br/>
 > It also comes with its own Hooks incase of when UI is not needed.
 
-[![NPM](https://img.shields.io/npm/v/react-files-uploader.svg)](https://www.npmjs.com/package/react-files-uploader) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/react-files-uploader.svg)](https://www.npmjs.com/package/rfiles-uploader-rc) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Install
 
 ```bash
-npm install --save react-files-uploader
+npm install --save files-uploader-rc
 ```
 
 ## Usage
@@ -20,8 +20,8 @@ npm install --save react-files-uploader
 ```jsx
 import React, { Component } from 'react'
 
-import { UploaderUI } from 'react-files-uploader'
-import 'react-files-uploader/dist/index.css'
+import { UploaderUI } from 'files-uploader-rc'
+import 'files-uploader-rc/dist/index.css'
 
 class Example extends Component {
   const uri=`this-is-your-remote-server-url-for-the-upload`
@@ -38,8 +38,8 @@ class Example extends Component {
 ```jsx
 import React, { Component } from 'react'
 
-import { UploaderUI } from 'react-files-uploader'
-import 'react-files-uploader/dist/index.css'
+import { UploaderUI } from 'files-uploader-rc'
+import 'files-uploader-rc/dist/index.css'
 
 class Example extends Component {
   const uri=`this-is-your-remote-server-url-for-the-upload`
@@ -62,7 +62,7 @@ class Example extends Component {
 ```jsx
 import React, { Component } from 'react'
 
-import { useRcfUploader } from 'react-files-uploader'
+import { useRcfUploader } from 'files-uploader-rc'
 
 
 class Example extends Component {

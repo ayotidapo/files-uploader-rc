@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { useRcfUploader, UploaderUI } from 'react-files-uploader'
-import 'react-files-uploader/dist/index.css'
+import { useRcfUploader, UploaderUI } from 'files-uploader-rc'
+import 'files-uploader-rc/dist/index.css'
 
 const App = () => {
   const uri = `https://api.cloudinary.com/v1_1/oladapo/upload`
