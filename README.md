@@ -1,4 +1,6 @@
-# RcFiles-uploader
+# RcFiles-uploader   
+![](https://yarnpkg.com/package/files-uploader-rc)
+
 A very flexible file uploader that comes with: <br/>
  UI showing progress bar of simultaneous (Single or Multiple) file(s) uploading,<br/>
  allows cancel of uploading,<br/>
