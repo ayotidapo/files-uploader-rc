@@ -30,15 +30,19 @@ const App = () => {
   // eslint-disable-next-line no-unused-vars
   const [returnUrls, setUrls] = React.useState([])
 
-  const onCompleted = (returnUrls) => {
+  const getResponseUrls = (returnUrls) => {
     setUrls(returnUrls)
   }
 
-  // console.log(returnUrls)
+  console.log(returnUrls)
   ///  End of To use UI ////
   return (
     <>
-      <UploaderUI allowMultiple onCompleted={onCompleted} uploadUri={uri} />
+      <UploaderUI
+        allowMultiple
+        getResponseUrls={getResponseUrls}
+        uploadUri={uri}
+      />
     </>
   )
 }
