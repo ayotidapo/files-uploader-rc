@@ -85,10 +85,12 @@ class Example extends Component {
 }
 ```
 
-## DEMO
+## DEMO (gif)
 
 ![Demo](https://res.cloudinary.com/oladapo/video/upload/v1616492886/test2-folder/yd0aqwzvngvogtpu6gxn.mov)
 
+## Screenshot
+![](https://res.cloudinary.com/oladapo/image/upload/v1616607800/test2-folder/jmgjcy9yulh3ggnmveb8.png)
 ## License
 
 MIT © [https://github.com/ayotidapo/rcfiles-uploader](https://github.com/https://github.com/ayotidapo/rcfiles-uploader)
