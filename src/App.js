@@ -1,20 +1,20 @@
-import React from 'react';
-import ProgressWrapper from 'components/ProgressBar';
-import useRcfUploader from './useRcfUploader';
-import './App.scss';
+import React from 'react'
+import ProgressWrapper from 'components/ProgressBar'
+import useRcfUploader from './useRcfUploader'
+import './App.scss'
 
 function App() {
-  const [chosenFiles, setChosenFiles] = React.useState([]);
-  const uri = `https://api.cloudinary.com/v1_1/oladapo/upload`;
+  const [chosenFiles, setChosenFiles] = React.useState([])
+  const uri = `https://api.cloudinary.com/v1_1/oladapo/upload`
 
   const [uploading, completed, onRemoveFile, files, urls] = useRcfUploader(
     uri,
-    chosenFiles,
-  );
+    chosenFiles
+  )
 
   const onSelectFile = (newFiles) => {
-    setChosenFiles(newFiles);
-  };
+    setChosenFiles(newFiles)
+  }
   // React.useEffect(() => {
   //   // eslint-disable-next-line no-undef
   //   console.log(kiss.me);
@@ -34,7 +34,7 @@ function App() {
                   background: 'antiquewhite',
                   padding: '10px',
                   borderRadius: '5px',
-                  marginBottom: '5px',
+                  marginBottom: '5px'
                 }}
                 key={i}
               >
@@ -52,40 +52,40 @@ function App() {
           {completed && 'Files upload: completed!!'}
         </h5>
         <span
-          className="fl-u-wrap"
+          className='fl-u-wrap'
           onDrop={(e) => {
-            e.preventDefault();
-            onSelectFile(e.dataTransfer.files);
+            e.preventDefault()
+            onSelectFile(e.dataTransfer.files)
           }}
           onDragEnter={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
+            e.preventDefault()
+            e.stopPropagation()
             // / console.log('Files Entered: ');
           }}
           onDragOver={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
+            e.preventDefault()
+            e.stopPropagation()
             // console.log('Files Over: ');
           }}
           onDragLeave={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            return false;
+            e.preventDefault()
+            e.stopPropagation()
+            return false
           }}
         >
           <input
-            type="file"
-            id="file-selector"
+            type='file'
+            id='file-selector'
             style={{ display: 'none' }}
             multiple
             onChange={(e) => onSelectFile(e.target.files)}
             // eslint-disable-next-line no-return-assign
             onClick={(e) => {
               // eslint-disable-next-line no-param-reassign
-              e.target.value = null;
+              e.target.value = null
             }}
           />
-          <label className="pry-txt hand" htmlFor="file-selector">
+          <label className='pry-txt hand' htmlFor='file-selector'>
             To upload, click to browse file(s) or drag file(s) here.
           </label>
           {files.map((file) => (
@@ -98,7 +98,7 @@ function App() {
         </span>
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

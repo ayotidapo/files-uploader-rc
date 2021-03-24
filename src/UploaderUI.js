@@ -6,29 +6,31 @@ import './App.scss'
 const UploaderUI = (props) => {
   const [chosenFiles, setChosenFiles] = React.useState([])
   const uri = props.uploadUri
-  const { maxNumOfFiles, onCompleted } = props
+  const { removeBorder, maxNumOfFiles, getResponseUrls } = props
 
-  const [uploading, completed, onRemoveFile, files, urls] = useRcfUploader(
-    uri,
-    chosenFiles,
-    maxNumOfFiles
-  )
+  const [
+    uploading,
+    completed,
+    onRemoveFile,
+    files,
+    responseUrls
+  ] = useRcfUploader(uri, chosenFiles, maxNumOfFiles)
 
   const onSelectFile = (newFiles) => {
     setChosenFiles(newFiles)
   }
 
   React.useEffect(() => {
-    onCompleted(urls)
-  }, [urls.length])
+    getResponseUrls(responseUrls)
+  }, [responseUrls])
 
   return (
     <div style={{ display: 'flex' }}>
-      {urls.length > 0 && false && (
+      {responseUrls.length > 0 && false && (
         <div style={{ marginLeft: '50px', marginTop: '20px', width: '400px' }}>
           The urls of uploaded files are:
           <ul>
-            {urls.map((u, i) => (
+            {responseUrls.map((u, i) => (
               <li
                 style={{
                   maginBottom: '5px',
@@ -55,6 +57,7 @@ const UploaderUI = (props) => {
         </h5>
         <span
           className='fl-u-wrap'
+          style={{ border: removeBorder && 'none' }}
           onDrop={(e) => {
             e.preventDefault()
 

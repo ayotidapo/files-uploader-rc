@@ -11,7 +11,7 @@ const useRcfUploader = (upload_uri, filez = [], maxNumOfFiles = 10) => {
   const [completed, setCompleted] = React.useState(false)
   const [uploadedCount, setUploadCount] = React.useState(0)
 
-  const [urls, setUrls] = React.useState([])
+  const [responseUrls, setUrls] = React.useState([])
 
   const getFileUrls = () => {
     const fileUrls = files.map((file) => file.responseUrl)
@@ -126,7 +126,7 @@ const useRcfUploader = (upload_uri, filez = [], maxNumOfFiles = 10) => {
     }
   }
 
-  return [uploading, completed, onRemoveFile, files, urls]
+  return [uploading, completed, onRemoveFile, files, responseUrls]
 }
 
 export default useRcfUploader

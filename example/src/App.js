@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { useRcfUploader, UploaderUI } from 'react-files-uploader'
-import 'react-files-uploader/dist/index.css'
+import { useRcfUploader, UploaderUI } from 'files-uploader-rc'
+import 'files-uploader-rc/dist/index.css'
 
 const App = () => {
   const uri = `https://api.cloudinary.com/v1_1/oladapo/upload`
@@ -30,15 +30,19 @@ const App = () => {
   // eslint-disable-next-line no-unused-vars
   const [returnUrls, setUrls] = React.useState([])
 
-  const onCompleted = (returnUrls) => {
+  const getResponseUrls = (returnUrls) => {
     setUrls(returnUrls)
   }
 
-  // console.log(returnUrls)
+  console.log(returnUrls)
   ///  End of To use UI ////
   return (
     <>
-      <UploaderUI allowMultiple onCompleted={onCompleted} uploadUri={uri} />
+      <UploaderUI
+        allowMultiple
+        getResponseUrls={getResponseUrls}
+        uploadUri={uri}
+      />
     </>
   )
 }
