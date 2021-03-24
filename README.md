@@ -1,3 +1,4 @@
+
 # react-files-uploader
 
 > A very flexible file uploader that comes with: <br/>
@@ -94,5 +95,10 @@ class Example extends Component {
 ## License
 
 MIT © [https://github.com/ayotidapo/rcfiles-uploader](https://github.com/https://github.com/ayotidapo/rcfiles-uploader)
+
+# RcFiles-uploader   
+[npm i files-uploader-rc](https://yarnpkg.com/package/files-uploader-rc)
+
+
 
 # Full Docs coming...
