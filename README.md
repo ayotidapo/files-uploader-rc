@@ -94,11 +94,3 @@ class Example extends Component {
 ![](https://res.cloudinary.com/oladapo/image/upload/v1616607800/test2-folder/jmgjcy9yulh3ggnmveb8.png)
 ## License
 
-MIT © [https://github.com/ayotidapo/rcfiles-uploader](https://github.com/https://github.com/ayotidapo/rcfiles-uploader)
-
-# RcFiles-uploader   
-[npm i files-uploader-rc](https://yarnpkg.com/package/files-uploader-rc)
-
-
-
-# Full Docs coming...
