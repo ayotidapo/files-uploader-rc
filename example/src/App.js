@@ -4,10 +4,10 @@ import { useRcfUploader, UploaderUI } from 'files-uploader-rc'
 import 'files-uploader-rc/dist/index.css'
 
 const App = () => {
-  // const uri = `https://api.cloudinary.com/v1_1/oladapo/upload`
-  // const formDataField = 'file'
-  const uri = `https://app.outwork.ng/mobstaff-mobile/v1/images/profileImage`
-  const formDataField = 'imageFile'
+  const uri = `https://api.cloudinary.com/v1_1/oladapo/upload`
+  const formDataField = 'file'
+  // const uri = `https://app.outwork.ng/mobstaff-mobile/v1/images/profileImage`
+  // const formDataField = 'imageFile'
 
   // TO USE HOOKS ******//////
   const [chosenFiles, setChosenFiles] = React.useState([])
@@ -61,8 +61,8 @@ const App = () => {
         formDataField={formDataField}
         getResponseUrls={getResponseUrls}
         uploadUri={uri}
-        // forMe='dapo'
-        uriConfig={uriConfig} // OPTIONAL:    In case of a protected api route
+        forMe='dapo'
+        // uriConfig={uriConfig} // OPTIONAL:    In case of a protected api route
       />
     </>
   )

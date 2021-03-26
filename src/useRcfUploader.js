@@ -34,6 +34,7 @@ const useRcfUploader = (
   }, [])
 
   React.useEffect(() => {
+    console.log(filez)
     if (filez.length > 0) onSelectFile(filez)
   }, [filez])
 
