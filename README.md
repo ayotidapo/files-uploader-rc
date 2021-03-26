@@ -1,4 +1,3 @@
-
 # react-files-uploader
 
 > A very flexible file uploader that comes with: <br/>
@@ -30,42 +29,29 @@ class Example extends Component {
   const getResponseUrls = (returnUrls) => {
     setUrls(returnUrls)
   }
+
   const uri=`this-is-your-remote-server-url-for-the-upload`
-  
-  console.log(returnUrls) // this is an array urls of all successfully uploaded files
-  render() {
-    return <UploaderUI  getResponseUrls={getResponseUrls} uploadUri={uri} />
+
+  // uriConfig is OPTIONAL: In case of a protected api route
+   const uriConfig = {
+    headers: {
+      'x-auth-token': `eyJp1zs`
+    }
   }
 
+  console.log(returnUrls) // this is an array of urls of all successfully uploaded files
 
-}
-```
-
-### You can also pass your own custom component like below
-
-```jsx
-import React, { Component } from 'react'
-
-import { UploaderUI } from 'files-uploader-rc'
-import 'files-uploader-rc/dist/index.css'
-
-class Example extends Component {
- const [returnUrls, setUrls] = React.useState([])
-
-  const getResponseUrls = (returnUrls) => {
-    setUrls(returnUrls)
-  }
-  const uri=`this-is-your-remote-server-url-for-the-upload`
-  console.log(returnUrls) // this is an array urls of all successfully uploaded files
   render() {
     return (
-      <UploaderUI  getResponseUrls={getResponseUrls} uploadUri={uri}>
-        <div>
-        <button>Upload</button>
-        </div>
-      </UploaderUI>
-      )
-  }
+            <UploaderUI
+              allowMultiple
+              formDataField={formDataField} // This is the field name in the formdata payload e.g file
+              getResponseUrls={getResponseUrls}
+              uploadUri={uri}
+              uriConfig={uriConfig} // OPTIONAL:    In case of a protected api route
+            />
+          )
+       }
 
 
 }
@@ -86,7 +72,13 @@ class Example extends Component {
 
    const maxNumOfFiles='max-number-of-files-you-want-to-allow-for-upload'
 
-  const [uploading, completed, onRemoveFile, files, responseUrls] = useRcfUploader(uri, chosenFiles,maxNumOfFiles)
+  const [
+    uploading,
+    completed,
+    onRemoveFile,
+    files,
+    responseUrls
+    ] = useRcfUploader(uri,formDataField,chosenFiles,maxNumOfFiles,uriConfig)
 
    console.log(responseUrls)
 
@@ -99,11 +91,52 @@ class Example extends Component {
 }
 ```
 
-## DEMO (gif)
+### You can also pass your own custom component like below
 
-![Demo](https://res.cloudinary.com/oladapo/video/upload/v1616492886/test2-folder/yd0aqwzvngvogtpu6gxn.mov)
+```jsx
+import React, { Component } from 'react'
+
+import { UploaderUI } from 'files-uploader-rc'
+import 'files-uploader-rc/dist/index.css'
+
+class Example extends Component {
+ const [returnUrls, setUrls] = React.useState([])
+
+  const getResponseUrls = (returnUrls) => {
+    setUrls(returnUrls)
+  }
+
+  const uri=`this-is-your-remote-server-url-for-the-upload`
+
+  // uriConfig is OPTIONAL: In case of a protected api route
+   const uriConfig = {
+    headers: {
+      'x-auth-token': `eyJp1zs`
+    }
+  }
+
+  console.log(returnUrls) // this is an array of urls of all successfully uploaded files
+
+  render() {
+    return (
+            <UploaderUI
+              allowMultiple
+              formDataField={formDataField} // This is the field name in the formdata payload e.g file
+              getResponseUrls={getResponseUrls}
+              uploadUri={uri}
+              uriConfig={uriConfig} // OPTIONAL:    In case of a protected api route
+            >
+             <button>Upload files</button>
+            </UploaderUI>
+          )
+       }
+
+
+}
+```
 
 ## Screenshot
-![](https://res.cloudinary.com/oladapo/image/upload/v1616607800/test2-folder/jmgjcy9yulh3ggnmveb8.png)
-## License
 
+![](https://res.cloudinary.com/oladapo/image/upload/v1616607800/test2-folder/jmgjcy9yulh3ggnmveb8.png)
+
+## License
