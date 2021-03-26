@@ -75,7 +75,10 @@ const useRcfUploader = (
       const source = CancelToken.source()
 
       const response = await axios.post(uri, formdata, {
-        ...uriConfig,
+        header: {
+          ...uriConfig.headers,
+          'Content-Type': 'multipart/form-data'
+        },
         cancelToken: source.token,
         onUploadProgress: (ProgressEvent) => {
           const progress = (ProgressEvent.loaded / ProgressEvent.total) * 100
