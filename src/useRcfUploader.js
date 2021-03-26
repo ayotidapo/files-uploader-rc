@@ -145,17 +145,3 @@ const useRcfUploader = (
 }
 
 export default useRcfUploader
-
-// const config = {
-//   onUploadProgress: (progressEvent) => {
-//     const { loaded, total } = progressEvent
-//     percent = Math.floor((loaded * 100) / total)
-//     console.log(`${loaded}kb of ${total}kb | ${percent}%`) // just to see whats happening in the console
-//     if (percent <= 100) {
-//       setPercentage(percent) // hook to set the value of current level that needs to be passed to the progressbar
-//     }
-//   },
-//   headers: {
-//     // custom headers goes here
-//   }
-// }
