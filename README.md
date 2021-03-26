@@ -1,3 +1,4 @@
+
 # react-files-uploader
 
 > A very flexible file uploader that comes with: <br/>
@@ -24,7 +25,14 @@ import { UploaderUI } from 'files-uploader-rc'
 import 'files-uploader-rc/dist/index.css'
 
 class Example extends Component {
+ const [returnUrls, setUrls] = React.useState([])
+
+  const getResponseUrls = (returnUrls) => {
+    setUrls(returnUrls)
+  }
   const uri=`this-is-your-remote-server-url-for-the-upload`
+  
+  console.log(returnUrls) // this is an array urls of all successfully uploaded files
   render() {
     return <UploaderUI  getResponseUrls={getResponseUrls} uploadUri={uri} />
   }
@@ -42,7 +50,13 @@ import { UploaderUI } from 'files-uploader-rc'
 import 'files-uploader-rc/dist/index.css'
 
 class Example extends Component {
+ const [returnUrls, setUrls] = React.useState([])
+
+  const getResponseUrls = (returnUrls) => {
+    setUrls(returnUrls)
+  }
   const uri=`this-is-your-remote-server-url-for-the-upload`
+  console.log(returnUrls) // this is an array urls of all successfully uploaded files
   render() {
     return (
       <UploaderUI  getResponseUrls={getResponseUrls} uploadUri={uri}>
@@ -85,12 +99,11 @@ class Example extends Component {
 }
 ```
 
-## DEMO
+## DEMO (gif)
 
 ![Demo](https://res.cloudinary.com/oladapo/video/upload/v1616492886/test2-folder/yd0aqwzvngvogtpu6gxn.mov)
 
+## Screenshot
+![](https://res.cloudinary.com/oladapo/image/upload/v1616607800/test2-folder/jmgjcy9yulh3ggnmveb8.png)
 ## License
 
-MIT © [https://github.com/ayotidapo/rcfiles-uploader](https://github.com/https://github.com/ayotidapo/rcfiles-uploader)
-
-# Full Docs coming...
