@@ -6,7 +6,15 @@ import './App.scss'
 const UploaderUI = (props) => {
   const [chosenFiles, setChosenFiles] = React.useState([])
   const uri = props.uploadUri
-  const { removeBorder, maxNumOfFiles, getResponseUrls } = props
+
+  const {
+    removeBorder,
+    maxNumOfFiles,
+    getResponseUrls,
+    formDataField,
+    uriConfig,
+    forMe
+  } = props
 
   const [
     uploading,
@@ -14,7 +22,14 @@ const UploaderUI = (props) => {
     onRemoveFile,
     files,
     responseUrls
-  ] = useRcfUploader(uri, chosenFiles, maxNumOfFiles)
+  ] = useRcfUploader(
+    uri,
+    formDataField,
+    chosenFiles,
+    maxNumOfFiles,
+    uriConfig,
+    forMe
+  )
 
   const onSelectFile = (newFiles) => {
     setChosenFiles(newFiles)
@@ -52,8 +67,8 @@ const UploaderUI = (props) => {
         <h5
           style={{ marginLeft: '100px', color: completed ? '#07f' : '#d63f10' }}
         >
-          {uploading && false && 'Files upload: ongoing...'}
-          {completed && false && 'Files upload: completed!!'}
+          {uploading && 'Files upload: ongoing...'}
+          {completed && 'Files upload: completed!!'}
         </h5>
         <span
           className='fl-u-wrap'
@@ -85,7 +100,7 @@ const UploaderUI = (props) => {
             style={{ display: 'none' }}
             multiple={props.allowMultiple}
             onChange={(e) => onSelectFile(e.target.files)}
-            accept={props.allowedFiles}
+            accept={props.validMIME}
             // eslint-disable-next-line no-return-assign
             onClick={(e) => {
               // eslint-disable-next-line no-param-reassign
