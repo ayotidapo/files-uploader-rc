@@ -75,7 +75,7 @@ const useRcfUploader = (
       const source = CancelToken.source()
 
       const response = await axios.post(uri, formdata, {
-        header: {
+        headers: {
           ...uriConfig.headers,
           'Content-Type': 'multipart/form-data'
         },
