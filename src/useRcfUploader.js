@@ -1,31 +1,40 @@
+/* eslint-disable no-undef */
 import React from 'react'
 import axios from 'axios'
 import { v4 } from 'uuid'
 import fileReducer from './useReducer/fileReducer'
 
 // eslint-disable-next-line camelcase
-const useRcfUploader = (upload_uri, filez = [], maxNumOfFiles = 10) => {
+const useRcfUploader = (
+  uri,
+  formDataField,
+  filez = [],
+  maxNumOfFiles = 10,
+  uriConfig = {},
+  forMe
+) => {
   const [files, fileDispatcher] = React.useReducer(fileReducer, filez)
   const [uploading, setUploading] = React.useState(false)
   const [firstLoad, setFirstLoad] = React.useState(true)
   const [completed, setCompleted] = React.useState(false)
   const [uploadedCount, setUploadCount] = React.useState(0)
 
-  const [responseUrls, setUrls] = React.useState([])
+  const [resObj, setResObj] = React.useState([])
 
   const getFileUrls = () => {
-    const fileUrls = files.map((file) => file.responseUrl)
-    setUrls(fileUrls)
+    const resObj = files.map((file) => file.resObj)
+    setResObj(resObj)
   }
 
   React.useEffect(() => {
     // eslint-disable-next-line camelcase
-    if (!upload_uri) {
+    if (!uri) {
       throw new Error("upload_uri  is required as hook's first parameter")
     }
   }, [])
 
   React.useEffect(() => {
+    console.log(filez)
     if (filez.length > 0) onSelectFile(filez)
   }, [filez])
 
@@ -56,15 +65,17 @@ const useRcfUploader = (upload_uri, filez = [], maxNumOfFiles = 10) => {
       setCompleted(false)
       setFirstLoad(false)
 
-      const formdata = new window.FormData()
-      formdata.append('file', file.content)
-      formdata.append('upload_preset', 'iikmkha3')
+      const formdata = new FormData()
+      formdata.append(formDataField, file.content)
+
+      if (forMe) formdata.append('upload_preset', 'iikmkha3')
 
       const fileID = file.id
       const { CancelToken } = axios
       const source = CancelToken.source()
 
-      const response = await axios.post(upload_uri, formdata, {
+      const response = await axios.post(uri, formdata, {
+        ...uriConfig,
         cancelToken: source.token,
         onUploadProgress: (ProgressEvent) => {
           const progress = (ProgressEvent.loaded / ProgressEvent.total) * 100
@@ -76,14 +87,19 @@ const useRcfUploader = (upload_uri, filez = [], maxNumOfFiles = 10) => {
           })
         }
       })
-      const { secure_url: responseUrl } = response.data
-      fileDispatcher({ type: 'ADD_RESPONSE_URL', fileID, responseUrl })
+      // const { secure_url: responseUrl } = response.data
+      const resObj = response.data
+      fileDispatcher({
+        type: 'ADD_RESPONSE_URL',
+        fileID,
+        resObj: resObj
+      })
       setUploadCount((prevState) => prevState + 1)
     } catch (e) {
       fileDispatcher({ type: 'REMOVE_FILE', fileID: file.id })
 
       const errMsg = e?.response?.data?.message || e?.message
-
+      console.log(errMsg)
       if (errMsg) throw new Error(errMsg || 'error occured')
     }
   }
@@ -98,7 +114,7 @@ const useRcfUploader = (upload_uri, filez = [], maxNumOfFiles = 10) => {
       content: file,
       progress: 0,
       cancelFunc: null,
-      responseUrl: '',
+      resObj: null,
       loading: false,
       success: false
     }))
@@ -126,7 +142,7 @@ const useRcfUploader = (upload_uri, filez = [], maxNumOfFiles = 10) => {
     }
   }
 
-  return [uploading, completed, onRemoveFile, files, responseUrls]
+  return [uploading, completed, onRemoveFile, files, resObj]
 }
 
 export default useRcfUploader
