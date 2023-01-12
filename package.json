@@ -1,6 +1,6 @@
 {
   "name": "files-uploader-rc",
-  "version": "3.0.0",
+  "version": "3.2.1",
   "description": "Made with create-react-library",
   "author": "https://github.com/ayotidapo",
   "license": "MIT",
@@ -33,12 +33,12 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "node-sass": "^4.14.1",
     "rc-progress": "^3.1.3",
+    "sass": "^1.57.1",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "microbundle-crl": "^0.13.10",
+    "axios": "^0.21.1",
     "babel-eslint": "^10.0.3",
     "cross-env": "^7.0.2",
     "eslint": "^6.8.0",
@@ -52,14 +52,14 @@
     "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-standard": "^4.0.1",
     "gh-pages": "^2.2.0",
+    "microbundle-crl": "^0.13.10",
+    "node-sass": "^4.14.1",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.4",
+    "rc-progress": "^3.1.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "^3.4.1",
-    "axios": "^0.21.1",
-    "node-sass": "^4.14.1",
-    "rc-progress": "^3.1.3",
     "uuid": "^8.3.2"
   },
   "files": [

@@ -24,10 +24,11 @@ import { UploaderUI } from 'files-uploader-rc'
 import 'files-uploader-rc/dist/index.css'
 
 class Example extends Component {
- const [returnUrls, setUrls] = React.useState([])
+  
+  const [responseObj, setResponseObj] = React.useState([])
 
-  const getResponseUrls = (returnUrls) => {
-    setUrls(returnUrls)
+   const getResponseObj = (responseObj) => {
+    setResponseObj(responseObj)
   }
 
   const uri=`this-is-your-remote-server-url-for-the-upload`
@@ -45,17 +46,23 @@ class Example extends Component {
     return (
             <UploaderUI
               allowMultiple
-              formDataField={formDataField} // This is the field name in the formdata payload e.g file
-              getResponseUrls={getResponseUrls}
+              formDataField={formDataField} 
+              getResponseObj={getResponseObj}
               uploadUri={uri}
-              uriConfig={uriConfig} // OPTIONAL:    In case of a protected api route
+              uriConfig={uriConfig} // OPTIONAL:   
             />
           )
        }
 
+// allowMultiple to allow multiple file upload default is false.
+// formDataField is any name given to the field of formdata while calling thr append method e.g formdata.append(formDataField)
+// getResponseObj accepts a callback to update the state of 'responseObj' in  const [responseObj, setResponseObj] = React.useStat([])
+// uploadUri this is your remote server url for the upload
+// uriConfig is OPTIONAL: In case of a protected api route as stated in the example above.
 
 }
 ```
+
 
 ## As a Hook
 
@@ -77,16 +84,22 @@ class Example extends Component {
     completed,
     onRemoveFile,
     files,
-    responseUrls
+    resObj
     ] = useRcfUploader(uri,formDataField,chosenFiles,maxNumOfFiles,uriConfig)
 
    console.log(responseUrls)
 
 
-   // maxNumOfFiles is 5 by default but can be changed.
-   // responseUrls is an array of all the urls of the uploaded files
+   
+   // resObj is an array of response of succesfully uploaded files from the server.
    // uploading indicates uploading is still ongoing this can be used to know when to enable the submit  button
    // completed is when no ongoing uploads
+   // uri this is your remote server url for the upload
+   // chosenFiles is the initial state of file selected its always an empty array before any file selection.
+   // same as value of chosenFiles with some extra property.
+   // formDataField is any name given to the field of formdata while calling the append method e.g formdata.append(formDataField)
+   // maxNumOfFiles is 5 by default but can be changed.
+   // uriConfig is OPTIONAL: In case of a protected api route as stated in the example above.
 
 }
 ```
@@ -100,10 +113,11 @@ import { UploaderUI } from 'files-uploader-rc'
 import 'files-uploader-rc/dist/index.css'
 
 class Example extends Component {
- const [returnUrls, setUrls] = React.useState([])
 
-  const getResponseUrls = (returnUrls) => {
-    setUrls(returnUrls)
+  const [responseObj, setResponseObj] = React.useState([])
+
+   const getResponseObj = (responseObj) => {
+    setResponseObj(responseObj)
   }
 
   const uri=`this-is-your-remote-server-url-for-the-upload`
@@ -121,8 +135,8 @@ class Example extends Component {
     return (
             <UploaderUI
               allowMultiple
-              formDataField={formDataField} // This is the field name in the formdata payload e.g file
-              getResponseUrls={getResponseUrls}
+              formDataField={formDataField} 
+              getResponseObj={getResponseObj}
               uploadUri={uri}
               uriConfig={uriConfig} // OPTIONAL:    In case of a protected api route
             >
@@ -130,6 +144,14 @@ class Example extends Component {
             </UploaderUI>
           )
        }
+
+
+// allowMultiple to allow multiple file upload default is false.
+// formDataField is any name given to the field of formdata while calling thr append method e.g formdata.append(formDataField)
+// getResponseObj accepts a callback to update the state of 'responseObj' in  const [responseObj, setResponseObj] = React.useStat([])
+// uploadUri this is your remote server url for the upload
+// uriConfig is OPTIONAL: In case of a protected api route as stated in the example above.
+
 
 
 }
