@@ -10,25 +10,19 @@ const UploaderUI = (props) => {
   const {
     removeBorder,
     maxNumOfFiles,
-    getResponseUrls,
+    getResponseObj,
     formDataField,
     uriConfig,
-    forMe
+    forTest
   } = props
 
-  const [
-    uploading,
-    completed,
-    onRemoveFile,
-    files,
-    responseUrls
-  ] = useRcfUploader(
+  const { uploading, completed, onRemoveFile, files, resObj } = useRcfUploader(
     uri,
     formDataField,
     chosenFiles,
     maxNumOfFiles,
     uriConfig,
-    forMe
+    forTest
   )
 
   const onSelectFile = (newFiles) => {
@@ -36,16 +30,16 @@ const UploaderUI = (props) => {
   }
 
   React.useEffect(() => {
-    getResponseUrls(responseUrls)
-  }, [responseUrls])
+    getResponseObj(resObj)
+  }, [resObj])
 
   return (
     <div style={{ display: 'flex' }}>
-      {responseUrls.length > 0 && false && (
+      {resObj.length > 0 && forTest && (
         <div style={{ marginLeft: '50px', marginTop: '20px', width: '400px' }}>
           The urls of uploaded files are:
           <ul>
-            {responseUrls.map((u, i) => (
+            {resObj.map((obj, i) => (
               <li
                 style={{
                   maginBottom: '5px',
@@ -57,7 +51,7 @@ const UploaderUI = (props) => {
                 }}
                 key={i}
               >
-                {u.replace(`/oladapo/image/upload`, '')}
+                {obj?.url?.replace(`/oladapo/image/upload`, '')}
               </li>
             ))}
           </ul>

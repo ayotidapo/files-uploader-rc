@@ -11,7 +11,7 @@ const useRcfUploader = (
   filez = [],
   maxNumOfFiles = 10,
   uriConfig = {},
-  forMe
+  forTest
 ) => {
   const [files, fileDispatcher] = React.useReducer(fileReducer, filez)
   const [uploading, setUploading] = React.useState(false)
@@ -68,7 +68,7 @@ const useRcfUploader = (
       const formdata = new FormData()
       formdata.append(formDataField, file.content)
 
-      if (forMe) formdata.append('upload_preset', 'iikmkha3')
+      if (forTest) formdata.append('upload_preset', 'iikmkha3')
 
       const fileID = file.id
       const { CancelToken } = axios
@@ -106,7 +106,7 @@ const useRcfUploader = (
       if (errMsg) throw new Error(errMsg || 'error occured')
     }
   }
-
+  console.log(filez, resObj)
   const onSelectFile = (fileVal) => {
     const filesArr = [...fileVal]
 
@@ -145,7 +145,7 @@ const useRcfUploader = (
     }
   }
 
-  return [uploading, completed, onRemoveFile, files, resObj]
+  return { uploading, completed, onRemoveFile, files, resObj }
 }
 
 export default useRcfUploader

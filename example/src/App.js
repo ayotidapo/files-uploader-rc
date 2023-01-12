@@ -13,15 +13,11 @@ const App = () => {
   const [chosenFiles, setChosenFiles] = React.useState([])
 
   // eslint-disable-next-line no-unused-vars
-  const [
-    uploading,
-    completed,
-    onRemoveFile,
-    files,
-    responseurls
-  ] = useRcfUploader(uri, formDataField, chosenFiles)
-
-  console.log(files, completed, responseurls, 10)
+  const { completed, files, responseurls } = useRcfUploader(
+    uri,
+    formDataField,
+    chosenFiles
+  )
 
   // onSelectFile will be passed to onChange attr of the HTML input
 
@@ -37,10 +33,10 @@ const App = () => {
   // To use UI **********/////
 
   // eslint-disable-next-line no-unused-vars
-  const [returnUrls, setUrls] = React.useState([])
+  const [responseObj, setResponseObj] = React.useState([])
 
-  const getResponseUrls = (returnUrls) => {
-    setUrls(returnUrls)
+  const getResponseObj = (responseObj) => {
+    setResponseObj(responseObj)
   }
 
   // eslint-disable-next-line no-unused-vars
@@ -49,19 +45,20 @@ const App = () => {
       'x-auth-token': `eyJpZCI6MTY1OSwiZXhwaXJlcyI6MTYxNzY1MjM0ODE0OCwiZW1haWwiOiJ0Y2N0ZXN0QHppcHBpZXguY29tIiwicGFzc3dvcmQiOiJhZGU2M2I2YTc3OWI2Y2NjYjZiMDlmMzYyMzNlMjkwZTllNWEyOTQ5ZDEwMGM3ZWI0YWJmZDIzZTA3Y2E1ZTljNzYwNjAzZjYwNWE4ZmUxNSIsImxhc3RMb2dpbiI6MTYxNjc4ODM0ODEyNH0.RZxnf4bCNyiZBq1C--q97_kjkPKhk917EyiGF27g1zs`
     }
   }
+  console.log(files, completed, responseurls, 10)
 
   // validMIME
 
-  console.log(returnUrls)
+  console.log(responseObj)
   ///  End of To use UI ////
   return (
     <>
       <UploaderUI
         allowMultiple
         formDataField={formDataField}
-        getResponseUrls={getResponseUrls}
+        getResponseObj={getResponseObj}
         uploadUri={uri}
-        forMe='dapo'
+        forTest='dapo'
         // uriConfig={uriConfig} // OPTIONAL:    In case of a protected api route
       />
     </>
