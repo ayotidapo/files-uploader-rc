@@ -36,7 +36,7 @@ class Example extends Component {
   // uriConfig is OPTIONAL: In case of a protected api route
    const uriConfig = {
     headers: {
-      'x-auth-token': `eyJp1zs`
+      'x-auth-token': `your-authentication-token`
     }
   }
 
@@ -125,7 +125,7 @@ class Example extends Component {
   // uriConfig is OPTIONAL: In case of a protected api route
    const uriConfig = {
     headers: {
-      'x-auth-token': `eyJp1zs`
+      'x-auth-token': `your-authentication-token`
     }
   }
 
