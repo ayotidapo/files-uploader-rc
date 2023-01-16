@@ -79,13 +79,13 @@ class Example extends Component {
 
    const maxNumOfFiles='max-number-of-files-you-want-to-allow-for-upload'
 
-  const [
+  const {
     uploading,
     completed,
     onRemoveFile,
     files,
     resObj
-    ] = useRcfUploader(uri,formDataField,chosenFiles,maxNumOfFiles,uriConfig)
+   } = useRcfUploader(uri,formDataField,chosenFiles,maxNumOfFiles,uriConfig)
 
    console.log(responseUrls)
 
