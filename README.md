@@ -33,7 +33,7 @@ class Example extends Component {
 
   const uri=`this-is-your-remote-server-url-for-the-upload`
 
-  // uriConfig is OPTIONAL: In case of a protected api route
+  // uriConfig is OPTIONAL: In case of a protected api route for example
    const uriConfig = {
     headers: {
       'x-auth-token': `your-authentication-token`
@@ -122,7 +122,7 @@ class Example extends Component {
 
   const uri=`this-is-your-remote-server-url-for-the-upload`
 
-  // uriConfig is OPTIONAL: In case of a protected api route
+  // uriConfig is OPTIONAL: In case of a protected api route for example
    const uriConfig = {
     headers: {
       'x-auth-token': `your-authentication-token`
