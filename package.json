@@ -9,6 +9,7 @@
     "url": "git+https://github.com/ayotidapo/files-uploader-rc.git"
   },
   "main": "dist/index.js",
+  "types": "types/index.d.ts",
   "module": "dist/index.modern.js",
   "source": "src/index.js",
   "engines": {
@@ -27,9 +28,9 @@
     "deploy": "gh-pages -d example/build"
   },
   "peerDependencies": {
-    "react": "^15.0.0 || ^16 || ^17",
-    "react-dom": "^15.0.0 || ^16 || ^17",
-    "react-scripts": "^3.4.1"
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
+    "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0",
+    "react-scripts": "^4.0.0 || ^5.0.0"
   },
   "dependencies": {
     "rc-progress": "^3.1.3",
