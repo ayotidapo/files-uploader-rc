@@ -5,14 +5,15 @@ import { v4 } from 'uuid'
 import fileReducer from './useReducer/fileReducer'
 
 // eslint-disable-next-line camelcase
-const useRcfUploader = (
-  uri,
-  formDataField,
-  filez = [],
-  maxNumOfFiles = 10,
-  uriConfig = {},
-  forTest
-) => {
+const useRcfUploader = (props) => {
+  const {
+    uri,
+    formDataField,
+    filez = [],
+    maxNumOfFiles = 10,
+    uriConfig = {},
+    forTest
+  } = props
   const [files, fileDispatcher] = React.useReducer(fileReducer, filez)
   const [uploading, setUploading] = React.useState(false)
   const [firstLoad, setFirstLoad] = React.useState(true)

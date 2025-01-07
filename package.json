@@ -62,7 +62,8 @@
     "uuid": "^8.3.2"
   },
   "files": [
-    "dist"
+    "dist",
+    "@types/"
   ],
   "bugs": {
     "url": "https://github.com/ayotidapo/files-uploader-rc/issues"

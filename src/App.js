@@ -7,10 +7,10 @@ function App() {
   const [chosenFiles, setChosenFiles] = React.useState([])
   const uri = `https://api.cloudinary.com/v1_1/oladapo/upload`
 
-  const { uploading, completed, onRemoveFile, files, urls } = useRcfUploader(
+  const { uploading, completed, onRemoveFile, files, urls } = useRcfUploader({
     uri,
     chosenFiles
-  )
+  })
 
   const onSelectFile = (newFiles) => {
     setChosenFiles(newFiles)

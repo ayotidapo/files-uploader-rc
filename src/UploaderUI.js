@@ -16,14 +16,14 @@ const UploaderUI = (props) => {
     forTest
   } = props
 
-  const { uploading, completed, onRemoveFile, files, resObj } = useRcfUploader(
+  const { uploading, completed, onRemoveFile, files, resObj } = useRcfUploader({
     uri,
     formDataField,
     chosenFiles,
     maxNumOfFiles,
     uriConfig,
     forTest
-  )
+  })
 
   const onSelectFile = (newFiles) => {
     setChosenFiles(newFiles)
