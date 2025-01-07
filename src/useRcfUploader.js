@@ -8,13 +8,13 @@ import fileReducer from './useReducer/fileReducer'
 const useRcfUploader = (props) => {
   const {
     uri,
-    formDataField,
-    filez = [],
+    inputFieldName,
+    selectedFiles = [],
     maxNumOfFiles = 10,
     uriConfig = {},
     forTest
   } = props
-  const [files, fileDispatcher] = React.useReducer(fileReducer, filez)
+  const [files, fileDispatcher] = React.useReducer(fileReducer, selectedFiles)
   const [uploading, setUploading] = React.useState(false)
   const [firstLoad, setFirstLoad] = React.useState(true)
   const [completed, setCompleted] = React.useState(false)
@@ -35,9 +35,9 @@ const useRcfUploader = (props) => {
   }, [])
 
   React.useEffect(() => {
-    console.log(filez)
-    if (filez.length > 0) onSelectFile(filez)
-  }, [filez])
+    console.log(selectedFiles)
+    if (selectedFiles.length > 0) onSelectFile(selectedFiles)
+  }, [selectedFiles])
 
   React.useEffect(() => {
     const fileLen = files.length
@@ -67,7 +67,7 @@ const useRcfUploader = (props) => {
       setFirstLoad(false)
 
       const formdata = new FormData()
-      formdata.append(formDataField, file.content)
+      formdata.append(inputFieldName, file.content)
 
       if (forTest) formdata.append('upload_preset', 'iikmkha3')
 
@@ -107,7 +107,7 @@ const useRcfUploader = (props) => {
       if (errMsg) throw new Error(errMsg || 'error occured')
     }
   }
-  console.log(filez, resObj)
+
   const onSelectFile = (fileVal) => {
     const filesArr = [...fileVal]
 

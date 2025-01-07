@@ -24,7 +24,7 @@ import { UploaderUI } from 'files-uploader-rc'
 import 'files-uploader-rc/dist/index.css'
 
 class Example extends Component {
-  
+
   const [responseObj, setResponseObj] = React.useState([])
 
    const getResponseObj = (responseObj) => {
@@ -46,23 +46,22 @@ class Example extends Component {
     return (
             <UploaderUI
               allowMultiple
-              formDataField={formDataField} 
+              inputFieldName={inputFieldName}
               getResponseObj={getResponseObj}
               uploadUri={uri}
-              uriConfig={uriConfig} // OPTIONAL:   
+              uriConfig={uriConfig} // OPTIONAL:
             />
           )
        }
 
 // allowMultiple to allow multiple file upload default is false.
-// formDataField is any name given to the field of formdata while calling thr append method e.g formdata.append(formDataField)
+// inputFieldName is any name given to the field of formdata while calling thr append method e.g formdata.append(inputFieldName)
 // getResponseObj accepts a callback to update the state of 'responseObj' in  const [responseObj, setResponseObj] = React.useStat([])
 // uploadUri this is your remote server url for the upload
 // uriConfig is OPTIONAL: In case of a protected api route as stated in the example above.
 
 }
 ```
-
 
 ## As a Hook
 
@@ -75,7 +74,7 @@ import { useRcfUploader } from 'files-uploader-rc'
 class Example extends Component {
   const uri=`this-is-your-remote-server-url-for-the-upload`
 
-   const [chosenFiles, setChosenFiles] = React.useState([])
+   const [selectedFiles, setSelectedFiles] = React.useState([])
 
    const maxNumOfFiles='max-number-of-files-you-want-to-allow-for-upload'
 
@@ -85,19 +84,19 @@ class Example extends Component {
     onRemoveFile,
     files,
     resObj
-   } = useRcfUploader(uri,formDataField,chosenFiles,maxNumOfFiles,uriConfig)
+   } = useRcfUploader({uri,inputFieldName,selectedFiles,maxNumOfFiles,uriConfig})
 
    console.log(responseUrls)
 
 
-   
+
    // resObj is an array of response of succesfully uploaded files from the server.
    // uploading indicates uploading is still ongoing this can be used to know when to enable the submit  button
    // completed is when no ongoing uploads
    // uri this is your remote server url for the upload
-   // chosenFiles is the initial state of file selected its always an empty array before any file selection.
-   // same as value of chosenFiles with some extra property.
-   // formDataField is any name given to the field of formdata while calling the append method e.g formdata.append(formDataField)
+   // selectedFiles is the initial state of file selected its always an empty array before any file selection.
+   // same as value of selectedFiles with some extra property.
+   // inputFieldName is any name given to the field of formdata while calling the append method e.g formdata.append(inputFieldName)
    // maxNumOfFiles is 5 by default but can be changed.
    // uriConfig is OPTIONAL: In case of a protected api route as stated in the example above.
 
@@ -135,7 +134,7 @@ class Example extends Component {
     return (
             <UploaderUI
               allowMultiple
-              formDataField={formDataField} 
+              inputFieldName={inputFieldName}
               getResponseObj={getResponseObj}
               uploadUri={uri}
               uriConfig={uriConfig} // OPTIONAL:    In case of a protected api route
@@ -147,7 +146,7 @@ class Example extends Component {
 
 
 // allowMultiple to allow multiple file upload default is false.
-// formDataField is any name given to the field of formdata while calling thr append method e.g formdata.append(formDataField)
+// inputFieldName is any name given to the field of formdata while calling thr append method e.g formdata.append(inputFieldName)
 // getResponseObj accepts a callback to update the state of 'responseObj' in  const [responseObj, setResponseObj] = React.useStat([])
 // uploadUri this is your remote server url for the upload
 // uriConfig is OPTIONAL: In case of a protected api route as stated in the example above.

@@ -4,29 +4,29 @@ import useRcfUploader from './useRcfUploader'
 import './App.scss'
 
 const UploaderUI = (props) => {
-  const [chosenFiles, setChosenFiles] = React.useState([])
+  const [selectedFiles, setSelectedFiles] = React.useState([])
   const uri = props.uploadUri
 
   const {
     removeBorder,
     maxNumOfFiles,
     getResponseObj,
-    formDataField,
+    inputFieldName,
     uriConfig,
     forTest
   } = props
 
   const { uploading, completed, onRemoveFile, files, resObj } = useRcfUploader({
     uri,
-    formDataField,
-    chosenFiles,
+    inputFieldName,
+    selectedFiles,
     maxNumOfFiles,
     uriConfig,
     forTest
   })
 
   const onSelectFile = (newFiles) => {
-    setChosenFiles(newFiles)
+    setSelectedFiles(newFiles)
   }
 
   React.useEffect(() => {

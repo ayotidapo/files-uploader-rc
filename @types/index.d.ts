@@ -2,11 +2,11 @@ declare module 'files-uploader-rc' {
   // Define the props for the hook
   interface UseRcfUploaderProps {
     uri: string
-    formDataField: string
-    chosenFiles: Record<string, any>[]
-    maxNumOfFiles: number
-    uriConfig: Record<string, any>
-    forTest: boolean
+    inputFieldName: string
+    selectedFiles: Record<string, any>[]
+    maxNumOfFiles?: number
+    uriConfig?: Record<string, any>
+    forTest?: boolean
   }
 
   // Define the result type for the hook
